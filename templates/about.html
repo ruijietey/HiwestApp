@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About | HiWest Summarization{% endblock%}
+{% block heading %}
+ABOUT <span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span style="font-size:1.1em">S</span>UM</span>
+{% endblock %}
+{% block content %}
+
+<p>Most extractive summarization models usually employ a hierarchical encoder for document summarization. However, these extractive models are solely using document-level information to classify and select sentences which may not be the most effective way. In addition, most state-of-the-art (SOTA) models will be using huge number of parameters to learn effectively from large amount of data which causes the computational costs to be very expensive.</p>
+<p>Hence, <b>Hierarchical Weight Sharing Transformers for Summarization (<span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span style="font-size:1.1em">S</span>UM</span>)</b> is created for the purpose of document summarization, with a model size that is over 10 times smaller than current existing <a href="https://arxiv.org/abs/1903.10318">models that fine-tune BERT for summarization</a>. Moreover, the proposed model learns effectively from both sentence and document level representations with weight sharing mechanisms. The proposed model can outperform the other SOTA models when smaller dataset is used for training. <span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span style="font-size:1.1em">S</span>UM</span> can also be trained and evaluated in a shorter amount of time.</p>
+<div >
+    <br>
+    <h4 style="text-align:center">Architecture of <span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span style="font-size:1.1em">S</span>UM</span></h4>
+    <img class="center" src="{%  static  'base/architecture.JPG'  %}" alt="" style="margin:auto; display:block; height:400px" class="px-4"></div>
+
+
+{% endblock %}

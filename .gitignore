@@ -1,0 +1,8 @@
+checkpoints/hiwest_distil.pt
+checkpoints/*
+checkpoints
+checkpoints/hiwest.pt
+checkpoints/bertsum.pt
+checkpoints/hiwestalbert.pt
+myEnv/*
+newerEnv/*

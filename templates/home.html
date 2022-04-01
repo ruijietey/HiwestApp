@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block heading %}
+<span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST <span
+    style="font-size:1.1em">S</span>UMMARIZER
+{% endblock %}
+
+{% block content %}
+{% if request.method == 'GET' %}
+
+
+<p>Please enter your full text for summarization:</p>
+
+<form action="." method="POST" class="p-1"> {% csrf_token %}
+    <label for="numSents" style="font-size: 0.9em">No. of sentences:</label>
+    <input type="number" name="numSents" id="numSents" style="width:40px; font-size:0.8em" class="me-4" step="1"
+        value="3">
+    <input type="checkbox" name="model" value="bertsum" id="model"><span class="mx-2" style="font-size:0.9em"><span
+            style="font-size:1.1em">B</span>ERT<span style="font-size:1.1em">S</span>UM (DistilBERT)</span>
+    <input type="checkbox" name="model" value="hiwestalbert" id="model" checked="true"> <span class="mx-2"
+        style="font-size:0.9em"><span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span
+            style="font-size:1.1em">S</span>UM (ALBERT)</span>
+    <input type="checkbox" name="model" value="hiwestdistil" id="model"><span class="mx-2" style="font-size:0.9em">
+        <span style="font-size:1.1em">H</span>I<span style="font-size:1.1em">W</span>EST<span
+            style="font-size:1.1em">S</span>UM (DistilBERT)</span>
+    <textarea placeholder="Enter full text here (Max: 500 words)" id="textArea" name="text" cols="30" rows="10"
+        class="form-control mt-2"></textarea>
+    Word Count: <span id="wordCount">0</span>
+    <button class="btn btn-success mt-2 float-end" id="generate" type="submit">Extract Summary</button>
+</form>
+{% else %}
+<div id="summary" style="clear:both">
+    <h3>Original Text:</h3>
+    <p>
+        {% for sent in sents %}
+        {% if forloop.counter0 in summary_ids%}
+        <span style="background:yellow" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Score: {{ sent.scores  }}">{{ sent.text }}</span>
+        {% else %}
+        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Score: {{ sent.scores }}"> {{ sent.text }} </span>
+        {% endif %}
+        {% endfor %}
+    </p>
+
+    <h3>Summary Generated:</h3>
+    <p>
+        {{ summary }}
+    </p>
+
+
+</div>
+{% endif %}
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    function countWord(event) {
+        let str = event.currentTarget.value;
+        let countNode = document.getElementById('wordCount');
+        let count = str.toString().split(" ").length;
+        countNode.innerText = count.toString();
+    }
+
+    let textArea = document.querySelector('textarea');
+    textArea.addEventListener("change", countWord, false);
+    
+
+
+</script>
+{% endblock %}
