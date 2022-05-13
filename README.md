@@ -10,6 +10,9 @@ Please setup a virtual environment with the packages listed below:
   <li>tokenizers==0.11.6</li>
 </ul>
 
+## Checkpoints
+Please download the checkpoints on https://drive.google.com/drive/folders/1Vi5eaT-7Us-6OmLoWaCPRRTZsWL2OGDz?usp=sharing and move them into ./checkpoints directory.
+
 ## Running the application
 Remember to use the correct virtual environment with packages installed. Use the following command at root directory for Django application:
 ```
